@@ -1,0 +1,25 @@
+[project]
+name = "tasknotify"
+version = "0.1.0"
+description = "Headless notify"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "PyGObject",
+    "psutil>=5.3.0",
+]
+
+[project.scripts]
+tasknotify = "tasknotify:main"
+
+[dependency-groups]
+dev = [
+    "black",
+    "isort",
+    "mypy",
+    "pygobject-stubs",
+    "types-psutil",
+]
+
+[tool.isort]
+profile = "black"
