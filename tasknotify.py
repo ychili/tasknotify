@@ -6,6 +6,7 @@ import logging
 import os
 import sys
 from collections.abc import Collection, Iterator, Sequence
+from typing import TYPE_CHECKING
 
 import gi
 import psutil
@@ -17,6 +18,9 @@ except (ImportError, ValueError):
     logging.error("libnotify not installed")
     raise
 
+if TYPE_CHECKING:
+    from _typeshed import SupportsRead
+
 APP_NAME = "tasknotify"
 NOTIFICATION_SIZE_LIMIT = 1024
 REQUIRED_VARIABLES = ["DISPLAY", "DBUS_SESSION_BUS_ADDRESS"]
@@ -25,8 +29,8 @@ _VERBOSITY_LOG_LEVELS = {None: logging.WARNING, 1: logging.INFO, 2: logging.DEBU
 logger = logging.getLogger(__name__)
 
 
-def read_stdin(n: int = NOTIFICATION_SIZE_LIMIT) -> str:
-    return sys.stdin.read(n).replace("\0", "").strip()
+def read_body_text(reader: SupportsRead[str], n: int = NOTIFICATION_SIZE_LIMIT) -> str:
+    return reader.read(n).replace("\0", "").strip()
 
 
 def process_environs(uid: int | None = None) -> Iterator[dict[str, str]]:
@@ -113,7 +117,7 @@ def notify_headless(
         session_variables = REQUIRED_VARIABLES
     _set_environ(session_variables)
     if body is not None:
-        logging.debug("will create notification with body text: %r", body)
+        logger.debug("will create notification with body text: %r", body)
     return notify(summary, body, app_name)
 
 
@@ -165,19 +169,17 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     if args.body is None:
         try:
-            text = read_stdin(n=args.limit)
+            text = read_body_text(sys.stdin, n=args.limit)
         except OSError as err:
-            logging.error("unable to read from standard input: %s", err)
+            logger.error("unable to read from standard input: %s", err)
             return 1
         if not text:
-            logging.debug("no input on standard input")
+            logger.debug("no input on standard input")
             return 0
     else:
         text = args.body
     result = notify_headless(summary=args.summary, body=text, app_name=args.app_name)
-    if result:
-        return 0
-    return 1
+    return 0 if result else 1
 
 
 if __name__ == "__main__":
