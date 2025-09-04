@@ -1,5 +1,7 @@
 """tasknotify - Headless notify"""
 
+from __future__ import annotations
+
 import argparse
 import collections
 import logging
@@ -83,8 +85,7 @@ def notify(summary: str, body: str | None = None, app_name: str | None = None) -
     """Send libnotify notification."""
     # Docs for libnotify:
     # <https://gnome.pages.gitlab.gnome.org/libnotify/>
-    if not app_name:
-        # app_name cannot be '\0'.
+    if app_name is None:
         app_name = APP_NAME
     if not Notify.init(app_name):
         logger.error("failed to initialize libnotify with app_name: '%s'", app_name)
