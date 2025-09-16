@@ -17,6 +17,11 @@ except (ImportError, ValueError):
 import tasknotify
 
 
+@pytest.fixture(autouse=True)
+def debug_messages_from_glib(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setenv("G_MESSAGES_DEBUG", "all")
+
+
 @pytest.fixture
 def mock_notify(monkeypatch: pytest.MonkeyPatch) -> unittest.mock.Mock:
     """Mock a successful call to `tasknotify.notify`."""
