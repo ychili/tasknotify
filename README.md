@@ -3,6 +3,10 @@ headless environments such as scripts run by cron.
 It does this by looking for  the environment variables `DISPLAY` and
 `DBUS_SESSION_BUS_ADDRESS` in other processes, likely from the current
 desktop session, and setting them before calling libnotify.
+This method is based on another program, [`notify-send-headless`][1],
+provided by Peter Odding’s `proc` Python package.
+
+[1]: https://proc.readthedocs.io/en/latest/api.html#module-proc.notify
 
 # Usage
 
@@ -19,7 +23,7 @@ argument *BODY* is given. The first positional argument is the notification's
 summary line.
 
 For Plasma notifications at least, the notification will not be saved to
-history unless it comes with a valid desktop-entry hint -- it has to know
+history unless it comes with a valid desktop-entry hint—it has to know
 what application the notification came from. To enable this, create a valid
 desktop file in `~/.local/share/applications` for tasknotify, and name it
 `tasknotify.desktop`.
@@ -27,11 +31,27 @@ Or, replace tasknotify with the app name from the `--app-name` argument
 to save history on a per-application basis.
 
 References:
+    - <https://docs.gtk.org/gio/class.Notification.html#description>
     - <https://specifications.freedesktop.org/desktop-entry-spec/latest/>
-    - <https://www.reddit.com/r/kde/comments/vo5am7/comment/ieaxehl/>
 
 # Requirements
 
-- libnotify
-- PyGObject
-- psutils
+- [libnotify](https://gitlab.gnome.org/GNOME/libnotify)
+- [PyGObject](https://wiki.gnome.org/Projects/PyGObject)
+- [psutils](https://github.com/rrthomas/psutils)
+
+# Copyright
+
+Copyright ⓒ 2025 Dylan Maltby
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+<http://www.apache.org/licenses/LICENSE-2.0>
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
