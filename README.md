@@ -31,8 +31,9 @@ Or, replace tasknotify with the app name from the `--app-name` argument
 to save history on a per-application basis.
 
 References:
-    - <https://docs.gtk.org/gio/class.Notification.html#description>
-    - <https://specifications.freedesktop.org/desktop-entry-spec/latest/>
+
+- <https://docs.gtk.org/gio/class.Notification.html#description>
+- <https://specifications.freedesktop.org/desktop-entry-spec/latest/>
 
 # Requirements
 
@@ -42,10 +43,10 @@ References:
 
 # Copyright
 
-Copyright ⓒ 2025–2026 Dylan Maltby
+Copyright © 2025–2026 Dylan Maltby
 
 Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
+you may not use this software except in compliance with the License.
 You may obtain a copy of the License at
 
 <http://www.apache.org/licenses/LICENSE-2.0>
