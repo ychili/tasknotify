@@ -154,7 +154,10 @@ def cla_parser() -> argparse.ArgumentParser:
         "body",
         metavar="BODY",
         nargs="?",
-        help="produce a notification with this %(metavar)s (default read from stdin)",
+        help=(
+            "produce a notification with this %(metavar)s"
+            " (default: read from standard input)"
+        ),
     )
     parser.add_argument(
         "-a", "--app-name", help=f"app name for the notification (default: {APP_NAME})"
