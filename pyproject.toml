@@ -38,19 +38,12 @@ include = [
 profile = "black"
 
 [tool.mypy]
-warn_unused_configs = true
-warn_redundant_casts = true
-warn_unused_ignores = true
-strict_equality = true
-check_untyped_defs = true
-
-disallow_subclassing_any = true
-disallow_untyped_decorators = true
-disallow_any_generics = true
-
-disallow_untyped_calls = true
-disallow_incomplete_defs = true
-disallow_untyped_defs = true
+files = [
+    "tasknotify.py",
+    "tests/",
+]
+python_version = "3.10"
+strict = true
 
 [tool.pytest.ini_options]
 filterwarnings = [
