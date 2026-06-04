@@ -1,0 +1,26 @@
+requires = [ "tox>=4.22" ]
+env_list = [ "test", "typing" ]
+
+[env_run_base]
+package = "wheel"
+wheel_build_env = ".pkg"
+
+[env.test]
+description = "run the tests with pytest"
+system_site_packages = true
+dependency_groups = [ "test" ]
+commands = [
+  [
+    "python",
+    "-m",
+    "pytest",
+    "{tty:--color=yes}",
+    { replace = "posargs", default = [ "tests" ], extend = true },
+  ]
+]
+
+[env.typing]
+description = "type check with mypy"
+system_site_packages = true
+dependency_groups = [ "dev", "test" ]
+commands = [ [ "python", "-m", "mypy", { replace = "posargs", extend = true } ] ]

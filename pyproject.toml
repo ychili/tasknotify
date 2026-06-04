@@ -28,6 +28,9 @@ dev = [
     "pygobject-stubs",
     "types-psutil",
 ]
+test = [
+    "pytest>=6.2.5",
+]
 
 [tool.flit.sdist]
 include = [
