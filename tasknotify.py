@@ -1,4 +1,4 @@
-# Copyright 2025 Dylan Maltby
+# Copyright 2025-2026 Dylan Maltby
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
 """tasknotify - Headless notify"""
 
 from __future__ import annotations
+
+__lazy_modules__ = ["argparse", "collections", "collections.abc", "psutil"]
 
 import argparse
 import collections
