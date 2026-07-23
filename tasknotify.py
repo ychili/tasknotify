@@ -27,11 +27,13 @@ from typing import TYPE_CHECKING
 import gi
 import psutil
 
+logger = logging.getLogger(__name__)
+
 try:
     gi.require_version("Notify", "0.7")
     from gi.repository import GLib, Notify
 except (ImportError, ValueError):
-    logging.error("libnotify not installed")
+    logger.error("libnotify not installed")
     raise
 
 if TYPE_CHECKING:
@@ -41,8 +43,6 @@ APP_NAME = "tasknotify"
 NOTIFICATION_SIZE_LIMIT = 1024
 REQUIRED_VARIABLES = ["DISPLAY", "DBUS_SESSION_BUS_ADDRESS"]
 _VERBOSITY_LOG_LEVELS = {None: logging.WARNING, 1: logging.INFO, 2: logging.DEBUG}
-
-logger = logging.getLogger(__name__)
 
 
 def read_body_text(reader: SupportsRead[str], n: int = NOTIFICATION_SIZE_LIMIT) -> str:
