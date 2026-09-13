@@ -34,7 +34,9 @@ test = [
 
 [tool.flit.sdist]
 include = [
+    ".gitignore",
     "tests/",
+    "tox.toml",
 ]
 
 [tool.isort]
